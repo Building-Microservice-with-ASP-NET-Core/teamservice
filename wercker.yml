@@ -1,4 +1,4 @@
-box: mcr.microsoft.com/dotnet/core/sdk:2.2.300
+box: mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim
 no-response-timeout: 10
 build:
   steps: 
@@ -58,6 +58,6 @@ deploy:
         cwd: $WERCKER_OUTPUT_DIR/app
         username: $USERNAME
         password: $PASSWORD
-        repository: dotnetcoreserviceszh/teamservice
+        repository: zhixin9001/aspnetcoremicroservice_teamservice
         registry: https://registry.hub.docker.com
         entrypoint: "/pipeline/source/app/docker_entrypoint.sh"

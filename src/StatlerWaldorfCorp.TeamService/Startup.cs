@@ -7,24 +7,31 @@ using Microsoft.Extensions.DependencyInjection;
 using StatlerWaldorfCorp.TeamService.Models;
 using StatlerWaldorfCorp.TeamService.Persistence;
 
-namespace StatlerWaldorfCorp.TeamService {
+namespace StatlerWaldorfCorp.TeamService
+{
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
-        {
-        }
-                
+
         public IConfigurationRoot Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-	        services.AddMvc();
+            services.AddControllers();
             services.AddScoped<ITeamRepository, MemoryTeamRepository>();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app,IHostingEnvironment env)
         {
-            app.UseMvc();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseRouting();
+            app.UseEndpoints(endpoint =>
+            {
+                endpoint.MapControllers();
+            });
         }
-    }   
+    }
 }
